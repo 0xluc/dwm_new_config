@@ -4,25 +4,32 @@
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 static const char statussep         = ';';      /* separator between status bars */
-static const char *fonts[]          = { "JetBrainsMonoNL Nerd Font:size=12:antialias=true:autohint=true" };
-static const char dmenufont[]       = "JetBrainsMonoNL Nerd Font:size=12:antialias=true:autohint=true";
+static const char *fonts[]          = { "JetBrainsMonoNL Nerd Font:size=8:antialias=true:autohint=true" };
+static const char dmenufont[]       = "JetBrainsMonoNL Nerd Font:size=8:antialias=true:autohint=true";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
+static const char col_gray2[]       = "#BBBBBB";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_gray5[]       = "#636363";
 static const char col_red[]         = "#b00606";
-static const char col_black[]       = "#0C0C0C";
+static const char col_black[]       = "#0F0F0F";
+static const char col_black2[]       = "#000000";
 static const char col_white[]       = "#FFFFFF";
 static const char col_cyan[]        = "#005577";
 static const char col_purple[]        = "#846DCF";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray5, col_white, col_gray5 },
-	[SchemeSel]  = { col_white, col_black,  col_purple  },
+	[SchemeNorm] = { col_white, col_black, col_gray5 },
+	[SchemeSel]  = { col_white, col_black2,  col_purple  },
 };
+
+static const char *const autostart[] = {
+	"librewolf", NULL,
+	NULL /* terminate */
+};
+
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -70,6 +77,8 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_b , spawn,          SHCMD("konsole -e bluetoothctl") },
+	{ MODKEY,                       XK_e, spawn,    SHCMD("/home/d/scripts/toogle_keys.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                      XK_Tab,    focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -88,10 +97,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_period,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_comma, focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_period,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_comma, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
