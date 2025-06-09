@@ -6,8 +6,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const char statussep         = ';';      /* separator between status bars */
-static const char *fonts[]          = { "JetBrainsMonoNL Nerd Font:size=12:antialias=true:autohint=true" };
-static const char dmenufont[]       = "JetBrainsMonoNL Nerd Font:size=12:antialias=true:autohint=true";
+static const char *fonts[]          = { "JetBrainsMonoNL Nerd Font:size=10:antialias=true:autohint=true" };
+static const char dmenufont[]       = "JetBrainsMonoNL Nerd Font:size=10:antialias=true:autohint=true";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#BBBBBB";
 static const char col_gray3[]       = "#bbbbbb";
@@ -82,7 +82,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b , spawn,          SHCMD("konsole -e bluetoothctl") },
+	{ MODKEY|ShiftMask,             XK_c , spawn,          SHCMD("/home/d/scripts/bt_autofix.sh") },
 	{ MODKEY,                       XK_e, spawn,    SHCMD("/home/d/scripts/toogle_keys.sh") },
+	{ MODKEY,                       XK_o, spawn,    SHCMD("/home/d/bin/openpdf") },
+    { MODKEY|ShiftMask,             XK_a, spawn,    SHCMD("xdotool type $(grep -v '^#' /home/d/suckless/bookmarks | dmenu -i -l 20 | cut -d ' ' -f1)") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                      XK_Tab,    focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -97,13 +100,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY,                       XK_period,  setlayout,      {0} },
+	{ MODKEY|ShiftMask,             XK_period,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_period,  focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_space,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_comma, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_period,  tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_space,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_comma, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
